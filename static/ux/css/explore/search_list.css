@@ -1,0 +1,48 @@
+
+#search_list_reg{
+    width:100%;
+    height:100%;
+}
+
+#search_list_container{
+    width:100%;
+    height:100%;
+}
+
+#search_list_container ul{
+    list-style:none; /* Eliminamos los bullets */
+    margin:0px; /* Quitamos los margenes */
+    padding:0px; /* Quitamos el padding */
+}
+
+#search_list_container ul li {
+    float:left; /* Hacemos que el menu se muestre horizontal */
+    /*border:1px solid #8c97ff;*/
+}
+
+#search_list_container ul li a{
+    text-decoration:none;
+}
+
+
+a.place_display:link > span.search_list_item{
+    border:2px solid #ecf6fb;
+}
+
+
+a.place_display:hover > span.search_list_item{
+    border:2px solid #ffa506;
+}
+
+
+span.search_list_item{
+    display: block;
+    width:226px;
+    height:50px;
+    font-size:12px;
+    padding:12px;
+    border:2px solid #0090FF;
+    background-color:white;
+    margin:6px 0 0 6px;
+    text-align: left;
+}

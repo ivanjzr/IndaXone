@@ -1,0 +1,271 @@
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    /* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+    /* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+    /* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    /* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+    /* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+    /* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+    /* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+    /* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+    /* Styles */
+}
+
+
+#top-wrapper{
+    width:100%;
+    height:125px;
+    background-color:#d6e5f0;
+    position: fixed;
+    z-index: 1005;
+    top:4;
+    color: white;
+}
+
+#search_bar_bg{
+    margin:0 0 0 16px;
+    padding:6px 0 0 0;
+    width:319px;
+    height:125px;
+    background-image:url('/static/ux/images/pc_1024x768/search-top-bg.png');
+    background-repeat:no-repeat;
+}
+
+#idx_logo{
+    margin:0 0 6px 24px;
+    width:272px;
+    height:52px;
+    background-image:url('/static/ux/images/pc_1024x768/top_logo_head.png');
+    background-repeat:no-repeat;
+}
+
+#serch_input{
+    margin:0 0 0 24px;
+    width:268px;
+    height:51px;
+    background-image:url('/static/ux/images/pc_1024x768/search_input.png');
+    background-repeat:no-repeat;
+}
+
+#left-column-wrapper{
+    width:264px;
+    height:100%;
+    position: absolute;
+    z-index: 3;
+    top:125px;
+    left:45px;
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(0, 0, 0);
+    background: -moz-linear-gradient(top, rgba(109,179,242,0.5) 0%, rgba(30,105,222,0.09) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(109,179,242,0.5)), color-stop(100%,rgba(30,105,222,0.09))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(109,179,242,0.5) 0%,rgba(30,105,222,0.09) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(109,179,242,0.5) 0%,rgba(30,105,222,0.09) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(109,179,242,0.5) 0%,rgba(30,105,222,0.09) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(109,179,242,0.5) 0%,rgba(30,105,222,0.09) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#806db3f2', endColorstr='#171e69de',GradientType=0 ); /* IE6-9 */
+}
+
+#result_msg_wrapper{
+    display: none;
+    background-image: url('/static/ux/images/pc_1024x768/results_msg.png');
+    width:257px;
+    height:91px;
+    margin:3px 0 0 3px;
+}
+#result_msg_wrapper img{
+    padding:4px;
+}
+#results_data{
+    padding:16px 0 0 18px;
+}
+#suggestion_msg_wrapper{
+    display: none;
+    background-image: url('/static/ux/images/pc_1024x768/suggestions.png');
+    width:258px;
+    height:98px;
+    margin:3px 0 0 3px;
+}
+#suggestion_msg_wrapper img{
+    padding:4px;
+}
+#suggestions_data{
+    padding:16px 0 0 18px;
+}
+
+
+#nav_buttons{
+    top:135px;
+    left:315px;
+    z-index: 1000;
+    position: fixed;
+}
+#nav_buttons a{
+    color: #00008b;
+}
+
+#results_panel{
+    bottom:0;
+    left:260px;
+    width:842px;
+    height:85px; /*toggle 425*/
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    z-index: 1004;
+    color: white;
+}
+#results_panel a{
+    color: white;
+}
+#results_panel_top{
+    width:100%;
+    height:26px;
+    padding:6px;
+    background-color: #f2f3ff;
+}
+#results_panel_close_btn{
+    float:right;
+    background-color: #ff0000;
+}
+
+/* hide top panel and messages */
+#results_panel_top{
+    display:none;
+}
+#results_panel_loading{
+    display:none;
+}
+
+
+
+
+#right-column-wrapper{
+    top:115px;
+    right:0px;
+    width:245px;
+    height:480px;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    position: fixed;
+    color: white;
+}
+
+
+#footer {
+    position:fixed;
+    z-index: 1;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+    background:#6cf;
+}
+
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    /* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+    /* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 320px) {
+    /* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    /* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+    /* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+    /* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+    /* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+    /* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+    /* Styles */
+}

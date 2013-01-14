@@ -1,0 +1,31 @@
+
+#search_bar_reg{
+    float:left;
+    width:105px;
+    margin:0 0 0 32px;
+}
+
+#search_location{
+    border:none;
+    width:105px;
+    outline:none; /* removes default chrome border */
+    font-size:12px;
+    font-weight:bold;
+    margin:20px 0 0 2px;
+}
+
+
+/* this one goes in his respective module entitle "current_city_reg" */
+#current_city_reg{
+    width:95px;
+    margin:0 6px 0 0;
+    float:right;
+}
+
+#current_city{
+    color:#0099cc;
+    font-size:12px;
+    font-weight:bold;
+    margin:20px 0 0 0;
+}
+/*-------------------------------------------------*/
