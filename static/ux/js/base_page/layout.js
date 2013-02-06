@@ -1,60 +1,81 @@
+
 /* Main Application Layout */
+
 _b.MainApp.Layout = Backbone.Marionette.Layout.extend({
+
 
     template: Handlebars.compile(_g.tmpl.base_page.find('#base-layout-template').html()),
 
+
     /* REGIONS */
     regions: {
-        'region_base_page_layout' : '#base_page_reg',
-        'region_map_canvas' : '#base_map_reg'
+        'region_base_page_layout' : '#base_page_reg'
     },
 
-    initialize: function(options){
+
+    initialize: function(){
+
         _.bindAll(this);
-        this.options = options;
-    },
-
-    onRender: function(){
-        /* Render Map */
-        this.show_map_section();
-
-        // Render Explore View
-        if (this.options.section === 'explore'){
-            this.show_explore_section();
-        }
-
-        // Trigger task if we have params
-        if (this.options.api_params_present){
-            _b.evtAgg.trigger('tasks_manager', this.options.params);
-        }
+        _b.evtAgg.bind('render_section', this.onRender, this);
 
     },
 
-    show_explore_section: function(){
-        if (!this.ExploreView){
-            this.ExploreView = new _b.ExploreApp.Layout();
-            this.region_base_page_layout.show(this.ExploreView);
-        }
+    /* we need this empty function */
+    render: function(){
+        console.log("rendering once");
     },
 
-    /* Map Canvas */
-    show_map_section: function(){
-        // Default city
-        var juarez_city = new google.maps.LatLng('31.72004553753411','-106.43798255029299');
-        // Default options model
-        var mapCanvasModel = new MapCanvas.Model({
-            zoom: 13,
-            center: juarez_city,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: true
-        })
-        // backbone view
-        var mapCanvasView = new MapCanvas.View({
-            model: mapCanvasModel
-        });
-        // Append Map
-        this.region_map_canvas.show(mapCanvasView);
+
+
+    onRender: function(render_options){
+        //
+        this.options = render_options;
+
+        console.log("printing current options");
+        console.log(this.options);
+
+        // if we don't have tasks to do just display view
+        if(typeof this.options.params === "undefined"){
+            console.log("Determine View");
+
+            // if we have previous call just close
+            if (this.section_called){
+                this.region_base_page_layout.close();
+            }
+
+            // Render Explore View
+            if (this.options.section === 'explore'){
+
+                this.ExploreView = new _b.ExploreApp.Layout();
+                this.region_base_page_layout.show(this.ExploreView);
+                console.log("calling explore once");
+
+                // flag section called
+                this.section_called = true;
+            }
+
+            // Render Explore View
+            if (this.options.section === 'index'){
+                console.log("calling index");
+
+                this.IndexView = new _b.IndexApp.Layout();
+                this.region_base_page_layout.show(this.IndexView);
+                // flag section called
+                this.section_called = true;
+            }
+
+
+        } else {
+
+            // Dynamically trigger section
+            _b.evtAgg.trigger(_g.url.section + '_tasks_manager', _g.url.params);
+
+        }
+
+
     }
+
+
 
 
 

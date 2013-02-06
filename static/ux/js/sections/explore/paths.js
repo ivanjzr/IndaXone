@@ -1,13 +1,15 @@
-// Index Modules
-window.modules = [
+window.ExploreApp = {};
 
-    // Search List
+// Index Modules
+ExploreApp.modules = [
+
+    // Search Listx
     "/search_list/a_model.js",
     "/search_list/search_list.js",
 
     // Search Bar
-    "/search_bar/a_model.js",
-    "/search_bar/search_bar.js",
+    "/search_input/a_model.js",
+    "/search_input/search.js",
 
     /*-------------- Results Panels -------------*/
     // Place content
@@ -23,7 +25,7 @@ window.modules = [
 ]
 
 // Templates
-window.templates = [
+ExploreApp.templates = [
 
     // sections
     "/search_bar.html",
@@ -36,7 +38,7 @@ window.templates = [
 ]
 
 // CSS
-window.css = [
+ExploreApp.styles = [
 
     // sections
     "/search_bar.css",

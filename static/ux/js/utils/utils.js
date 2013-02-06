@@ -153,7 +153,9 @@ function validate_resources(resource, type){
 }
 
 
-
+function capitaliseFirstLetter(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 var map_path_array = function(arr, base_path ){

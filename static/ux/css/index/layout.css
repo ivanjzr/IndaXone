@@ -1,4 +1,11 @@
 /* Main Base Layout Stylesheet */
-body{
-    background-color: #f2f3ff;
+
+#index_section_container{
+    width:100%;
+    height:125px;
+    background-color:#d6e5f0;
+    position: relative;
+    top:0px;
+    left:0px;
+    color: white;
 }

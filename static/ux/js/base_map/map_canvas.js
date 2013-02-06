@@ -15,22 +15,22 @@ MapCanvas.View = Backbone.Marionette.CompositeView.extend({
         _.bindAll(this);
 
         // Map Tools
-        _b.evtAgg.bind('zoom_in', this.on_zoom_in, this);
-        _b.evtAgg.bind('zoom_out', this.on_zoom_out, this);
-        _b.evtAgg.bind('restart', this.on_restart, this);
-        _b.evtAgg.bind('get_zoom', this.get_zoom, this);
+        M.evtAgg.bind('zoom_in', this.on_zoom_in);
+        M.evtAgg.bind('zoom_out', this.on_zoom_out);
+        M.evtAgg.bind('restart', this.on_restart);
+        M.evtAgg.bind('get_zoom', this.get_zoom);
 
         // clearers
-        _b.evtAgg.bind('clear_markers', this.clear_markers, this);
-        _b.evtAgg.bind('clear_infowindows', this.clear_infowindows, this);
+        M.evtAgg.bind('clear_markers', this.clear_markers);
+        M.evtAgg.bind('clear_infowindows', this.clear_infowindows);
 
         /* hover on & hover off */
-        _b.evtAgg.bind('info_window_hover', this.info_window_hover, this);
+        M.evtAgg.bind('info_window_hover', this.info_window_hover);
 
         // do a search
-        _b.evtAgg.bind('do_search', this.do_search, this);
+        M.evtAgg.bind('do_search', this.do_search);
         // load details from selected place
-        _b.evtAgg.bind('load_place_details', this.load_place_details, this);
+        M.evtAgg.bind('load_place_details', this.load_place_details);
 
     },
 
@@ -50,6 +50,14 @@ MapCanvas.View = Backbone.Marionette.CompositeView.extend({
          */
         this.$el.width('100%');
         this.$el.height('100%');
+
+        // Hide preloader on map ready
+        google.maps.event.addListenerOnce(this.map, 'tilesloaded', function(){
+            // do something when map has finished loaded
+            M.evtAgg.trigger('map_ready');
+        });
+
+
     },
 
     info_window_hover: function(ref_id){
@@ -83,15 +91,21 @@ MapCanvas.View = Backbone.Marionette.CompositeView.extend({
         this.map.setZoom( this.map.getZoom()+1 );
     },
 
+
+
     do_search: function(query) {
         var self = this;
-        console.log("estoy buscando: " + query);
-        //set search array values
+
+        console.log("Doing Search For " + query);
+
         var search_input_array = query;
         if (!query || query===""){
-            _b.evtAgg.trigger('load_search_results', 'EMPTY_VALUE', '');
-            return;
+
+            // No lo encuentra por que todavia no esta registrado
+            M.evtAgg.trigger('load_search_results', 'EMPTY_VALUE', '');
         }
+
+
         var request = {
             location: this.map_search_location,
             radius: '15000',
@@ -99,14 +113,16 @@ MapCanvas.View = Backbone.Marionette.CompositeView.extend({
             language: 'es',
             key: 'AIzaSyBO5NLGs9qYwYjWTBZ231anwru2UWW8cSI'
         };
-        // search place
-        this.service = new google.maps.places.PlacesService(this.map);
-        // append results
-        this.service.textSearch(request, function(results, status ) {
-            // Once we have the data bind the results
-            _b.evtAgg.trigger('load_search_results', status, results);
 
-            // iterate through search results
+        // Search place
+        this.service = new google.maps.places.PlacesService(this.map);
+        // Append results
+        this.service.textSearch(request, function(results, status ) {
+
+            M.evtAgg.trigger('load_search_results', status, results);
+
+
+            // Iterate through search results
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 // Iterate to load Markers
                 for (var i = 0; i < results.length; i++) {
@@ -115,6 +131,8 @@ MapCanvas.View = Backbone.Marionette.CompositeView.extend({
                 }
             }
         });
+
+
     },
 
 

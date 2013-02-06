@@ -38,10 +38,10 @@ a.place_display:hover > span.search_list_item{
 span.search_list_item{
     display: block;
     width:226px;
-    height:50px;
+    height:75px;
     font-size:12px;
     padding:12px;
-    border:2px solid #0090FF;
+    border:1px solid #0090FF;
     background-color:white;
     margin:6px 0 0 6px;
     text-align: left;

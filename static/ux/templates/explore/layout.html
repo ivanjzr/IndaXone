@@ -1,7 +1,8 @@
 <script id='explore-layout-template' type='text/x-handlebars-template'>
 
     <div id="top-wrapper">
-        <div id="search_bar_bg">
+
+        <div id="search_bar_wrapper">
             <div id="idx_logo"></div>
             <div id="serch_input">
                 <div id="search_bar_reg" class="search_bar_reg"></div>
@@ -11,6 +12,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="center_content">
+            <a href="#Index"> Inicio </a> |
+            <a href="#Register"> Registrar </a>
         </div>
     </div>
 
@@ -30,7 +35,7 @@
 
         <div id="results_panel_top" class="results_panel_top">
             <div id="results_panel_close_btn" class="results_panel_close_btn">
-                <a href="#Explore" id="close_results_panel"> x </a>
+                <a href="#" id="close_results_panel"><img src="/static/ux/images/pc_1024x768/close-btn.png"> </a>
             </div>
             <div sytle="clear:both"></div>
         </div>

@@ -28,7 +28,7 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
         M.evtAgg.bind('explore_tasks_manager', this.tasksManager);
 
         // will load results list`
-        M.evtAgg.bind("load_search_results", this.load_search_results, this);
+        M.evtAgg.bind("load_search_results", this.load_search_results);
 
         // will load panel contet
         M.evtAgg.bind("load_other_content", this.load_other_content);
@@ -89,39 +89,28 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
 
         },1000);
     },
-    on_close_results_panel: function(evt){
-        evt.preventDefault();
+    on_close_results_panel: function(){
         this.close_results_panel_data();
     },
 
     tasksManager: function(params){
         // do task
-        console.log("Executing Explore tasks manager");
+        console.log("explore tasks manager");
 
-        // if we have tasks execute tasks manager
-        if(typeof params !== "undefined"){
-
-            console.log("we have params exec tasks manager");
-
-            if (params.task){
-                // Do search
-                if (params.task==='doSearch'){
-                    var query = params.q;
-                    M.evtAgg.trigger('show_loading');
-                    M.evtAgg.trigger('do_search', query);
-                }
-                // do other
-                if (params.task==='displayItem'){
-                    var ref = params.ref;
-                    M.evtAgg.trigger('load_place_content', ref, function(){
-                    });
-                }
+        if (params.task){
+            // Do search
+            if (params.task==='doSearch'){
+                var query = params.q;
+                M.evtAgg.trigger('show_loading');
+                M.evtAgg.trigger('do_search', query);
             }
-
-
+            // do other
+            if (params.task==='displayItem'){
+                var ref = params.ref;
+                M.evtAgg.trigger('load_place_content', ref, function(){
+                });
+            }
         }
-
-
     },
 
     //---------------- Event CallBacks ---------------------------------------------
@@ -216,14 +205,8 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
     onRender: function(){
         /* Load sections */
         this.show_search_bar_section();
-    },
-
-
-    /* Search Bar */
-    show_search_bar_section: function(){
-        // Append Search Bar
-        this.SearchView = new SearchBar.View();
-        this.region_search_bar.show(this.SearchView);
+        // Hide loading when all content has been loaded
+        M.evtAgg.trigger('hide_loading');
     },
 
 
@@ -234,7 +217,14 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
 
 
 
-
+    /* Search Bar */
+    show_search_bar_section: function(){
+        // Append Search Bar
+        if( !this.search_bar ){
+            this.search_bar = new SearchBar.View();
+            this.region_search_bar.show(this.search_bar);
+        }
+    },
 
 
     display_ui_content: function(ui_el, content){
@@ -302,10 +292,6 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
         //console.log("status r: " + status);
 
 
-        // In order to work we must re render current view
-        this.render();
-
-
         //Close panel if opened
         this.close_results_panel_data();
 
@@ -317,7 +303,7 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
         this.clear_results_msg(); // if results msg just clear
         this.clear_suggestions(); // if suggestions just clear
 
-        // Despite any result just hide preloader
+        // Despite any result time just hide preloading
         M.evtAgg.trigger('hide_loading');
 
         // empty value
@@ -344,21 +330,32 @@ ExploreApp.Layout = Backbone.Marionette.Layout.extend({
             this.show_suggestions(suggestion_msg);
         }
 
-
         // Ok
         if (status==="OK"){
+
+
+            // save reference to object on the first
+            if (!G.search_list_region){
+                G.search_list_region = this.region_search_list;
+            }
 
             // Flag Search Done
             this.flag_search_done = true;
 
             var searchListCollection = new SearchList.Collection(results);
-            var SearchListView = new SearchList.View({
+            this.SearchListView = new SearchList.View({
                 collection:searchListCollection
             });
-            // Display search list module
-            this.region_search_list.show(SearchListView);
-        }
 
+
+            console.log(G.search_list_region);
+
+
+            // Display search list module
+            this.region_search_list.show(this.SearchListView);
+
+
+        }
     }/* load search results*/
 
 
